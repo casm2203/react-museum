@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { db } from '../firebase/firebaseConfig'
+import '../App.css';
 import {
     doc,
     getDocs,
@@ -118,20 +119,20 @@ const Artwork = () => {
                         <div className="row">
                             {/* Cards */}
                             {dbs.map(({ id, name_art, artist, museum, category, created_at, details, origyn_country }) => (
-                                <div className="col-6 mb-1" key={id}>
-                                    <div className="card" >
+                                <div className="col-4 mb-1" key={id}>
+                                    <div className="card w-100" >
                                         <div className="card-body">
-                                            <img src={`https://placeimg.com/200/200/${category}`} className="card-img-top" alt="..." />
-                                            <h5 className="card-title text-capitalize"> {name_art}</h5>
-                                            <p className="card-text text-capitalize"><strong>Nombre del artista:</strong> {artist}</p>
-                                            <p className="card-text"><strong>Detalle:</strong> {details}</p>
-                                            <p className="card-text"><strong>Categoria:</strong> {category}</p>
-                                            <p className="card-text"><strong>Museo:</strong> {museum}</p>
-                                            <p className="card-text"><strong>Fecha del arte:</strong> {created_at}</p>
-                                            <p className="card-text"><strong>Pais de origen:</strong> {origyn_country}</p>
-                                            <div className="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                                                <button onClick={() => formUpdate({ id, name_art, artist, museum, category, created_at, details, origyn_country })} type="button" className="btn btn-warning">Editar</button>
-                                                <button onClick={() => deleteData(id)} type="button" className="btn btn-danger">Eliminar</button>
+                                            <img src={`https://placeimg.com/200/200/${category}`} className="card-img-top" alt="..." /> 
+                                            <h6 className="card-title text-capitalize"> {name_art}</h6>
+                                            <p className="card-text txt-sz text-capitalize"><strong>Artista:</strong> {artist}</p>
+                                            <p className="card-text txt-sz"><strong>Detalle:</strong> {details}</p>
+                                            <p className="card-text txt-sz"><strong>Categoria:</strong> {category}</p>
+                                            <p className="card-text txt-sz"><strong>Museo:</strong> {museum}</p>
+                                            <p className="card-text txt-sz"><strong>Fecha del arte:</strong> {created_at}</p>
+                                            <p className="card-text txt-sz"><strong>Pais de origen:</strong> {origyn_country}</p>
+                                            <div className="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                <button onClick={() => formUpdate({ id, name_art, artist, museum, category, created_at, details, origyn_country })} type="button" className="btn btn-warning btn-sz">Editar</button>
+                                                <button onClick={() => deleteData(id)} type="button" className="btn btn-danger btn-sz">Eliminar</button>
                                             </div>
                                         </div>
                                     </div>
