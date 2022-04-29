@@ -10,6 +10,7 @@ import {
     deleteDoc,
 } from "firebase/firestore";
 import { nanoid } from 'nanoid';
+import Modal from './Modal';
 
 
 const formArt = {
@@ -27,6 +28,7 @@ const Artwork = () => {
     const [form, setForm] = useState(formArt);
     const [dbs, setDbs] = useState([]);
     const [edit, setEdit] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
 
     useEffect(() => {
         //Obtener datos
@@ -69,7 +71,7 @@ const Artwork = () => {
                 let created = new Date().toISOString().split('T')[0];
                 const docRef = await addDoc(collection(db, "artwork"), { ...form, id: nanoid(), created_at: created });
                 setDbs([...dbs, { ...form, created_at: created, id: docRef.id }]);
-                alert("Se agregó una nueva factura");
+                openM()
             } catch (error) {
                 console.log(error);
             }
@@ -111,8 +113,17 @@ const Artwork = () => {
         setEdit(false)
     };
 
+    const closeModal = () => (
+        setTimeout(() => {
+            setOpenModal(false)
+        }, 2000)
+    )
+
+    const openM = () => (setOpenModal(true))
+
     return (
         <div className="container-fluid">
+            {openModal ? <Modal closeModal={closeModal} /> : ""}
             <div className="row mt-3">
                 <div className="col shadow-sm p-3 mb-5 bg-body rounded">
                     <div className="container">
@@ -122,7 +133,7 @@ const Artwork = () => {
                                 <div className="col-4 mb-1" key={id}>
                                     <div className="card w-100" >
                                         <div className="card-body">
-                                            <img src={`https://placeimg.com/200/200/${category}`} className="card-img-top" alt="..." /> 
+                                            <img src={`https://placeimg.com/200/200/${category}`} className="card-img-top" alt="..." />
                                             <h6 className="card-title text-capitalize"> {name_art}</h6>
                                             <p className="card-text txt-sz text-capitalize"><strong>Artista:</strong> {artist}</p>
                                             <p className="card-text txt-sz"><strong>Detalle:</strong> {details}</p>
